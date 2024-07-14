@@ -1,0 +1,73 @@
+
+
+
+
+
+
+const int buzzer = 3;
+
+// Change to 0.5 for a slower version of the song, 1.25 for a faster version
+const float songSpeed = 1.0;
+
+// Defining frequency of each music note
+#define hi1 580
+#define hi2 610
+#define hi3 640
+#define hi4 670
+#define hi5 700
+#define hi6 730
+#define hi7 760
+#define hi8 790
+#define hi9 820
+#define hi10 850
+#define hi11 880
+#define hi12 910
+#define hi13 940
+#define hi14 970
+#define hi15 1000
+// Music notes of the song, 0 is a rest/pulse
+int notes[] = {
+    hi1,hi2,hi3,hi4,hi5,hi6,hi7,hi8,hi9,hi10,hi11,hi12,hi13,hi14,hi15,hi15,hi14,hi13,hi12,hi11,hi10,hi9,hi8,hi7,hi6,hi5,hi4,hi3,hi2,hi1,
+    hi1,hi2,hi3,hi4,hi5,hi6,hi7,hi8,hi9,hi10,hi11,hi12,hi13,hi14,hi15,hi15,hi14,hi13,hi12,hi11,hi10,hi9,hi8,hi7,hi6,hi5,hi4,hi3,hi2,hi1,
+    hi1,hi2,hi3,hi4,hi5,hi6,hi7,hi8,hi9,hi10,hi11,hi12,hi13,hi14,hi15,hi15,hi14,hi13,hi12,hi11,hi10,hi9,hi8,hi7,hi6,hi5,hi4,hi3,hi2,hi1,
+    hi1,hi2,hi3,hi4,hi5,hi6,hi7,hi8,hi9,hi10,hi11,hi12,hi13,hi14,hi15,hi15,hi14,hi13,hi12,hi11,hi10,hi9,hi8,hi7,hi6,hi5,hi4,hi3,hi2,hi1,
+    hi1,hi2,hi3,hi4,hi5,hi6,hi7,hi8,hi9,hi10,hi11,hi12,hi13,hi14,hi15,hi15,hi14,hi13,hi12,hi11,hi10,hi9,hi8,hi7,hi6,hi5,hi4,hi3,hi2,hi1,
+    hi1,hi2,hi3,hi4,hi5,hi6,hi7,hi8,hi9,hi10,hi11,hi12,hi13,hi14,hi15,hi15,hi14,hi13,hi12,hi11,hi10,hi9,hi8,hi7,hi6,hi5,hi4,hi3,hi2,hi1};
+
+// Durations (in ms) of each music note of the song
+// Quarter Note is 250 ms when songSpeed = 1.0
+int durations[] = {
+    90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,
+    90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,
+    90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,
+    90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,
+    90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,
+    90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90};
+
+void setup()
+{
+  const int totalNotes = sizeof(notes) / sizeof(int);
+  // Loop through each note
+  for (int i = 0; i < totalNotes; i++)
+  {
+    const int currentNote = notes[i];
+    float wait = durations[i] / songSpeed;
+    // Play tone if currentNote is not 0 frequency, otherwise pause (noTone)
+    if (currentNote != 0)
+    {
+      tone(buzzer, notes[i], wait); // tone(pin, frequency, duration)
+    }
+    else
+    {
+      noTone(buzzer);
+    }
+    // delay is used to wait for tone to finish playing before moving to next loop
+    delay(wait);
+  }
+}
+
+void loop()
+{
+  // Nothing in loop. Music only plays once.
+  // You can click reset on Arduino to replay the song.
+}
